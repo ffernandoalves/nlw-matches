@@ -42,7 +42,7 @@ def get_date(table):
     month, day = month_day.split(sep_month_day)
     date = {"week": dictionary.days_of_the_week[week.lower()],
             "month": dictionary.months_of_the_year[month.lower()],
-            "day": day
+            "day": int(day)
     }
     return date
 
@@ -54,14 +54,14 @@ def get_matches_for_day(schedule):
     """Times que participaram no dia e o horário"""
     sep_name_teams = " vs. "
     matchesSize = len(schedule["Match"])
-    all_matches = {}
+    all_matches = []
     _teams = {}
     for i in range(matchesSize):
         time = schedule["Time (ET)"][i]
         team1, team2 = schedule["Match"][i].split(sep_name_teams)
         _teams[team1] = get_flag_svg(team1)
         _teams[team2] = get_flag_svg(team2)
-        all_matches[i] = {"teams": _teams, "time": time}
+        all_matches.append({"teams": _teams, "time": time})
 
         _teams = {}
 
