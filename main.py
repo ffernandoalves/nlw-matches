@@ -2,9 +2,10 @@ from src import cup_matches
 
 from flask import Flask
 from flask_restx import Resource, Api, fields
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config.SWAGGER_SUPPORTED_SUBMIT_METHODS = ["get"]
 
 api = Api(app, version='1.0', title='World Cup Matches - NLW',
