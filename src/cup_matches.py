@@ -59,8 +59,8 @@ def get_matches_for_day(schedule):
     for i in range(matchesSize):
         time = schedule["Time (ET)"][i]
         team1, team2 = schedule["Match"][i].split(sep_name_teams)
-        _teams[team1] = get_flag_svg(team1)
-        _teams[team2] = get_flag_svg(team2)
+        _teams["team1"] = {"name": team1, "flag": get_flag_svg(team1)}
+        _teams["team2"] = {"name": team2, "flag": get_flag_svg(team2)}
         all_matches.append({"teams": _teams, "time": time})
 
         _teams = {}

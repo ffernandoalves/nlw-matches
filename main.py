@@ -19,9 +19,14 @@ date = api.model("Date", {
     "day": fields.Integer
 })
 
+team = api.model("Team", {
+    "name": fields.String,
+    "flag": fields.String,
+})
+
 teams = api.model("Teams", {
-    "team1": fields.String,
-    "team2": fields.String,
+    "team1": fields.Nested(team),
+    "team2": fields.Nested(team),
 })
 
 match = api.model("Match", {
@@ -30,7 +35,7 @@ match = api.model("Match", {
 })
 
 matches = api.model("Matches", {
-    "match": fields.List(fields.Nested(match)),
+    "matches": fields.List(fields.Nested(match)),
 })
 
 match_num = api.model("MatchesNumberByDate", {
@@ -68,7 +73,7 @@ class MatchByNumber(Resource):
         return calendar.get_match(match_num)
 
 @ns.route("/all_matches")
-class AllMatch(Resource):
+class AllMatches(Resource):
     @ns.doc(model=all_matches)
     def get(self):
         return calendar.get_all_matches()
